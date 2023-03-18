@@ -12,15 +12,28 @@ import com.example.song.model.Song;
 @RestController
 public class SongController{
     @Autowired
-    public SongJpaService song;
+    public SongJpaService songJpaService;
 
     @GetMapping("/songs")
     public ArrayList<Song> getSongs(){
-        return song.getSongs();
+        return songJpaService.getSongs();
     }
 
-    @GetMapping("/song/{songId}")
-    public Song getSongById(@PathVariable("songId") int songId){
-        return song.getSongById(songId);
+    @GetMapping("/songs/{id}")
+    public Song getSongById(@PathVariable("id") int id){
+        return songJpaService.getSongById(id);
+    }
+    @PostMapping("/songs")
+    public Song addSong(@RequestBody Song song){
+        return songJpaService.addSong(song);
+    }
+    @DeleteMapping("/songs/{id}")
+    public void deleteSongById(@PathVariable("id") int id){
+        songJpaService.deleteSongById(id);
+    }
+
+    @PutMapping("/songs/{id}")
+    public Song updateSong(@RequestBody Song song, @PathVariable("id") int id){
+        return songJpaService.updateSong(song, id);
     }
 }

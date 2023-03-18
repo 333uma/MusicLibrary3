@@ -23,14 +23,48 @@ public class SongJpaService implements SongRepository{
     }
 
     @Override
-    public Song getSongById(int songId){
+    public Song getSongById(int id){
         try{
-            Song s = songJpaRepository.findById(songId).get();
-            return s;
+            Song song = songJpaRepository.findById(id).get();
+            return song;
         }
         catch(Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
+
+    @Override
+    public Song addSong(Song song){
+        songJpaRepository.save(song);
+        return song;
+    }
     
+    @Override
+    public void deleteSongById(int id){
+        try{
+            songJpaRepository.deleteById(id);
+        }
+        catch(Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @Override
+    public Song updateSong(Song song, int id){
+        Song s = songJpaRepository.findById(id).get();
+        if(song.getSongName() != null){
+            s.setSongName(song.getSongName());
+        }
+        if(song.getLyricist() != null){
+            s.setLyricist(song.getLyricist());
+        }
+        if(song.getSinger() != null){
+            s.setSinger(song.getSinger());
+        }
+        if(song.getMusicDirector() != null){
+            s.setMusicDirector(song.getMusicDirector());
+        }
+        songJpaRepository.save(s);
+        return s;
+    }
 }
