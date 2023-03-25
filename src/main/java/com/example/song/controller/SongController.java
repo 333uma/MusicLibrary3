@@ -19,21 +19,21 @@ public class SongController{
         return songJpaService.getSongs();
     }
 
-    @GetMapping("/songs/{id}")
-    public Song getSongById(@PathVariable("id") int id){
+    @GetMapping("/songs/{songId}")
+    public Song getSongById(@PathVariable("songId") int id){
         return songJpaService.getSongById(id);
     }
     @PostMapping("/songs")
     public Song addSong(@RequestBody Song song){
         return songJpaService.addSong(song);
     }
-    @DeleteMapping("/songs/{id}")
-    public void deleteSongById(@PathVariable("id") int id){
+    @DeleteMapping("/songs/{songId}")
+    public void deleteSongById(@PathVariable("songId") int id){
         songJpaService.deleteSongById(id);
     }
 
-    @PutMapping("/songs/{id}")
-    public Song updateSong(@RequestBody Song song, @PathVariable("id") int id){
+    @PutMapping("/songs/{songId}")
+    public Song updateSong(@RequestBody Song song, @PathVariable("songId") int id){
         return songJpaService.updateSong(song, id);
     }
 }

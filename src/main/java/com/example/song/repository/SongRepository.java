@@ -5,8 +5,8 @@ import java.util.*;
 
 public interface SongRepository{
     ArrayList<Song> getSongs();
-    Song getSongById(int id);
+    Song getSongById(int songId);
     Song addSong(Song song);
-    void deleteSongById(int id);
-    Song updateSong(Song song, int id);
+    void deleteSongById(int songId);
+    Song updateSong(Song song, int songId);
 }
